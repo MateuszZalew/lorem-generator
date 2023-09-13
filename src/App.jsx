@@ -1,5 +1,6 @@
 import { useState } from "react";
 import dataText from "./data";
+import { nanoid } from "nanoid";
 
 const App = () => {
   const [number, setNumber] = useState(1);
@@ -7,6 +8,8 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const slicedArray = dataText.slice(0, number);
+    setText(slicedArray);
   };
 
   const handleChange = (e) => {
@@ -14,10 +17,10 @@ const App = () => {
   };
 
   return (
-    <section class="section-center">
+    <section className="section-center">
       <h4>Tired of boring lorem ipsum?</h4>
-      <form class="lorem-form" onSubmit={handleSubmit}>
-        <label for="number">Paragraphs:</label>
+      <form className="lorem-form" onSubmit={handleSubmit}>
+        <label htmlFor="number">Paragraphs:</label>
         <input
           type="number"
           id="number"
@@ -26,10 +29,19 @@ const App = () => {
           max={8}
           onChange={handleChange}
         />
-        <button class="btn" type="submit">
+        <button className="btn" type="submit">
           Generate
         </button>
       </form>
+      {text &&
+        text.map((paragraph) => {
+          const id = nanoid();
+          return (
+            <article className="lorem-text" key={id}>
+              <p>{paragraph}</p>
+            </article>
+          );
+        })}
     </section>
   );
 };
