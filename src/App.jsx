@@ -8,12 +8,13 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(typeof number);
     const slicedArray = dataText.slice(0, number);
     setText(slicedArray);
   };
 
   const handleChange = (e) => {
-    setNumber(e.target.value);
+    setNumber(parseInt(e.target.value));
   };
 
   return (
